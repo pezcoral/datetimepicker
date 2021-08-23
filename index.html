@@ -1,9 +1,20 @@
-<!--Script de datetimepicker - https://xdsoft.net/jqplugins/datetimepicker/ - actualizado 23082021-->
 <!--DESCARGAR PROYECTO datetimepicker desde https://github.com/xdan/datetimepicker -->
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!--scripts para iconos pequeno - actualizado 21062021 - jcoralt-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--Scripts manejo de fechas javascript - actualizado 21062021 - jcoralt-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+
+<!--Script de datetimepicker - https://xdsoft.net/jqplugins/datetimepicker/ - actualizado 23082021-->
 <link href="/Plugins/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" />
 <script src="/Plugins/datetimepicker/jquery.datetimepicker.js"></script>
 <script src="/Scripts/ViewScript/fechasDTPCwidget.js"></script>
+
+
 
 Only date:
 <input id="datepicker" type="text">
@@ -15,6 +26,7 @@ Only time:
 <input id="timepicker" type="text" >
 
 <script type="text/javascript">
+    /*Invocar funciones siempre una vez cargado el documento*/
     $(document).ready(function () {
         datepickerwidget("datepicker")
         datetimepickerwidget("datetimepicker")
