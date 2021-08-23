@@ -1,0 +1,21 @@
+<!--Script de datetimepicker - https://xdsoft.net/jqplugins/datetimepicker/ - actualizado 23082021 - jcoralt-->
+<link href="/Plugins/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" />
+<script src="/Plugins/datetimepicker/jquery.datetimepicker.js"></script>
+<script src="/Scripts/ViewScript/fechasDTPCwidget.js"></script>
+
+Only date:
+<input id="datepicker" type="text">
+
+Date and time:
+<input id="datetimepicker" type="text" >
+
+Only time:
+<input id="timepicker" type="text" >
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        datepickerwidget("datepicker")
+        datetimepickerwidget("datetimepicker")
+        timepickerwidget("timepicker")
+    });
+</script>
