@@ -1,2 +1,2 @@
 # datetimepicker
-Add a jquery datetimepicker
+Add a bootstrap 5 datetimepicker
