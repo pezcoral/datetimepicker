@@ -2,7 +2,9 @@
 Add a javascript bootstrap 5 datetimepicker
 
 ---------------------------
-Version 1 Important - Replace the name of the function with the new one and put the parameters passed. 
+If you came from Version 1 - Replace the name of the function with the new one and put the parameters passed. 
+---------------------------
+
 Version 2 - Only 1 function for all types of calendar
 ---------------------------
 See index.html
