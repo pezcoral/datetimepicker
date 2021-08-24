@@ -25,8 +25,8 @@ In development auto days count
  * @param {any} datepicker true si debe aparecer seleccion de fecha
  * @param {any} timepicker true si debe salir seleccion de hora
  * @param {any} input nombre del campo que se va a convertir en date
- * @param {any} mindate fecha minima que puede tener ese calendario
- * @param {any} maxdate  fecha maxima que puede tener ese calendario
+ * @param {any} mindate fecha minima que puede tener ese calendario - formato yyyy/mm/dd
+ * @param {any} maxdate  fecha maxima que puede tener ese calendario - formato yyyy/mm/dd
  * @param {any} rango  false - true -> si no tiene: false o si tiene rango: true
  * @param {any} Finputstart  nombre del campo html inicial del rango
  * @param {any} Finputstart  nombre del campo html final del rango
