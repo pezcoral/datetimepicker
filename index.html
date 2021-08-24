@@ -19,8 +19,9 @@
 Only date:
 <input id="datepicker" type="text">
 
-Date and time:
-<input id="datetimepicker" type="text" >
+Date range:
+<input id="FW_fechaI" type="text" >
+<input id="FW_fechaF" type="text" >
 
 Only time:
 <input id="timepicker" type="text" >
@@ -28,8 +29,8 @@ Only time:
 <script type="text/javascript">
     /*Invocar funciones siempre una vez cargado el documento*/
     $(document).ready(function () {
-        datepickerwidget("datepicker")
-        datetimepickerwidget("datetimepicker")
-        timepickerwidget("timepicker")
+        frameDTPWidget("datepicker")
+        frameDTPWidget("FW_FechaF", true, true, "DD/MM/YYYY hh:mm:00", "", "", true, "FW_FechaI", "FW_FechaF")
+        frameDTPWidget("timepicker", false, true)
     });
 </script>
