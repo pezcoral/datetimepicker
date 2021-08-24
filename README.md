@@ -1,5 +1,5 @@
 # datetimepicker
-Add a bootstrap 5 datetimepicker
+Add a javascript bootstrap 5 datetimepicker
 
 See index.html
 
@@ -14,3 +14,24 @@ Custom showing dates
 Custom holidays separattedfile
 
 In development auto days count
+
+
+
+---------------------------
+/**
+ * /Funcion para calendarios con fecha - fecha hora o solo hora - 
+ * Si es rango solo se necesita inicializar el primero
+ * @param {any} dateformat Calendario solamente ver formatos en momentjs Docs - Fecha: DD/MM/YYY - FechaHora: DD/MM/YYY hh:mm:00 - Solo hora: hh:mm:00 /el 00 se puede cambiar por ss para que tome los segundos
+ * @param {any} datepicker true si debe aparecer seleccion de fecha
+ * @param {any} timepicker true si debe salir seleccion de hora
+ * @param {any} input nombre del campo que se va a convertir en date
+ * @param {any} mindate fecha minima que puede tener ese calendario
+ * @param {any} maxdate  fecha maxima que puede tener ese calendario
+ * @param {any} rango  false - true -> si no tiene: false o si tiene rango: true
+ * @param {any} Finputstart  nombre del campo html inicial del rango
+ * @param {any} Finputstart  nombre del campo html final del rango
+ * @param {any} saltocuentadias  cantidad de dias en numero enterno que calcula el campo end
+ */
+
+
+frameDTPWidget(input, datepicker = true, timepicker = false, dateformat = "DD/MM/YYYY", mindate = "", maxdate = "", rango = false, Finputstart = "", Finputend = "", saltocuentadias = "")
