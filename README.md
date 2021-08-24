@@ -1,6 +1,9 @@
 # datetimepicker
 Add a javascript bootstrap 5 datetimepicker
 
+
+Version 2 - Only 1 function for all types of calendar
+
 See index.html
 
 
