@@ -7,7 +7,7 @@ If you came from Version 1 - Replace the name of the function with the new one a
 
 Version 2 - Only 1 function for all types of calendar
 ---------------------------
-Now Add auto dates count 
+Version UPDATE 03/09/2021 - Now Add auto dates count 
 
 ---------------------------
 See index.html
@@ -23,9 +23,6 @@ Custom showing dates
 Custom holidays separattedfile
 
 ---------------------------
-In development auto days count
-
-
 
 ---------------------------
 /**
