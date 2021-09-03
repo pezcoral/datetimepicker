@@ -112,32 +112,104 @@ function validateEndDateDTPW(vdateorigin) {
     return vdateorigin;
 }
 
-/*Funcion que cuenta dias quitando dias habiles segun lista de datepicker para asignar el dia final segun saltocuentadias*/
-function cuentadiasDTPW(Finputstart, Finputend, saltocuentadias) {
-    /*Tomar variable inicial y sumarele los dias festivos que existen despues de la fecha seleccionada*/
 
-    /*A ese dia final calculado, agregar ahora si los dias de saltocuentadias */
-     
-    /*Pasar parametros a campo final*/
-     
+$(document).ready(function () {
+    frameDTPWidget("iniciotest", true, false, "DD/MM/YYYY", "", "", true, "iniciotest", "fintest", saltocuentadias = "10")
+});
+
+/*Para ajustar la fecha al formato de devolucion al input final*/
+function changedate(fechatotal, dateformat) {
+
+    var diaconvert = parseInt(fechatotal.getDate());
+    var mesconvert = parseInt(fechatotal.getMonth() + 1);
+    if (diaconvert < 10) { diaconvert = "0" + diaconvert; }
+    if (mesconvert < 10) { mesconvert = "0" + mesconvert; }
+
+    var fechatotalINDEX = ""
+    /*Formato e dia mes año completo*/
+    if (dateformat == "DD/MM/YYYY") {
+        fechatotalINDEX = diaconvert + "/" + mesconvert + "/" + fechatotal.getFullYear();
+    }
+    /*faltan agregar otros formatos*/
+
+    /*Retorna con el formato final para el registro*/
+    return fechatotalINDEX;
+}
+
+
+/*Funcion que cuenta dias quitando dias habiles segun lista de datepicker para asignar el dia final segun saltocuentadias*/
+function cuentadiasDTPW(Finputstart, Finputend, saltocuentadias, dateformat) {
+    /*Ejecutar solo si se ha ingresado una fecha de incio*/
+    var VFinputstart = document.getElementById(Finputstart).value;
+    if (VFinputstart != "") {
+        var fechatotal = ""
+        /*Crear todos los tipos de formatos que pueden pasarse, por ahora solo esta este*/
+        if (dateformat == "DD/MM/YYYY") {
+            /*La fecha debe estar separada por año, mes, dia*/
+            VFinputstart = VFinputstart.split("/")
+            /*Asignar la fecha correcta*/
+            fechatotal = new Date(VFinputstart[2], (VFinputstart[1]-1), VFinputstart[0]);
+        }
+
+        var fechasexcluidas = "";
+
+        /*Recorrer la cantidad de dias de saltocuentadias para ir validadno si es sabado domingo o festivo*/
+        for (i = 1; i <= saltocuentadias; i++) {
+            /*Le suma un dia*/
+            fechatotal.setDate(fechatotal.getDate() + 1);
+            /*Tomar el numero del dia para validarlo 6=sabado 7=domingo*/
+            numdia = (parseInt(fechatotal.getDay()));
+
+            if (numdia == 6) {
+                /*Valida si ese dia es sabado o domingo y restarle 1 al ciclo for porque no cuenta*/
+                i = i - 1;
+                /*Ajustar mensaje de notificacion fechas*/
+                if (fechasexcluidas != "") { fechasexcluidas = fechasexcluidas + "<br>"; }
+                fechasexcluidas = fechasexcluidas + changedate(fechatotal, dateformat) + " es sábado";
+            }else if (numdia == 0) {
+                /*Valida si ese dia es sabado o domingo y restarle 1 al ciclo for porque no cuenta*/
+                i = i - 1;
+                /*Ajustar mensaje de notificacion fechas*/
+                if (fechasexcluidas != "") { fechasexcluidas = fechasexcluidas + "<br>"; }
+                fechasexcluidas = fechasexcluidas + changedate(fechatotal, dateformat) + " es domingo";
+            } else {
+                /*Validar si ese dia de semana L-V está entre los dias festivos segun el calendario de dias festivos*/
+                var fechatotalINDEX = changedate(fechatotal, dateformat)
+                /*Valida si existe el valor dentro del arreglo de datos de fechas festivos o feriados*/
+                if (FW_fechasDTPCwidget.indexOf(fechatotalINDEX) != -1) {
+                    i = i - 1;
+                    /*Ajustar mensaje de notificacion fechas*/
+                    if (fechasexcluidas != "") { fechasexcluidas = fechasexcluidas + "<br>"; }
+                    fechasexcluidas = fechasexcluidas + changedate(fechatotal, dateformat) + " es festivo";
+                }
+            }
+        }
+
+        /*Asignar fecha final a input final*/
+        document.getElementById(Finputend).value = changedate(fechatotal, dateformat);
+
+        /*Mostrar notificacion informando los dias festivos que se tomaron y fines de semana*/
+        if (fechasexcluidas != "") {
+            setTimeout(function () { toastgendefault("Días excluidos", fechasexcluidas); }, 1000);
+        }
+    }
 }
 
 /**
- * /Funcion para calendarios con fecha - fecha hora o solo hora - 
+ * Para crear el frame del widget
+ * Funcion para calendarios con fecha - fecha hora o solo hora - 
  * Si es rango solo se necesita inicializar el primero
  * @param {any} dateformat Calendario solamente ver formatos en momentjs Docs - Fecha: DD/MM/YYY - FechaHora: DD/MM/YYY hh:mm:00 - Solo hora: hh:mm:00 /el 00 se puede cambiar por ss para que tome los segundos
  * @param {any} datepicker true si debe aparecer seleccion de fecha
  * @param {any} timepicker true si debe salir seleccion de hora
  * @param {any} input nombre del campo que se va a convertir en date
- * @param {any} mindate fecha minima que puede tener ese calendario
- * @param {any} maxdate  fecha maxima que puede tener ese calendario
+ * @param {any} mindate fecha minima que puede tener ese calendario - formato yyyy/mm/dd
+ * @param {any} maxdate  fecha maxima que puede tener ese calendario - formato yyyy/mm/dd
  * @param {any} rango  false - true -> si no tiene: false o si tiene rango: true
  * @param {any} Finputstart  nombre del campo html inicial del rango
  * @param {any} Finputstart  nombre del campo html final del rango
  * @param {any} saltocuentadias  cantidad de dias en numero enterno que calcula el campo end
  */
-
-/*Para crear el frame del widget*/
 function frameDTPWidget(input, datepicker = true, timepicker = false, dateformat = "DD/MM/YYYY", mindate = "", maxdate = "", rango = false, Finputstart = "", Finputend = "", saltocuentadias = "") {
 
     yearstart = validateStartDateDTPW(mindate)
@@ -225,6 +297,6 @@ function frameDTPWidget(input, datepicker = true, timepicker = false, dateformat
 
     /*Crea accion onchange en el input start frente al input finish - Si el valor tiene la cantidad de dias a saltar, entonces crear en el DOM accion onchange de start frente a end*/
     if (saltocuentadias != "") {
-        document.getElementById(Finputstart).setAttribute('onchange', 'cuentadiasDTPW(\'' + Finputstart + ',' + Finputstart + ',' + saltocuentadias + '\')');
+        document.getElementById(Finputstart).setAttribute('onblur', 'cuentadiasDTPW(\'' + Finputstart + '\',\'' + Finputend + '\',\'' + saltocuentadias + '\',\'' + dateformat + '\' )');
     }
 }
